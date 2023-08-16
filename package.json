@@ -1,0 +1,98 @@
+{
+  "name": "nanoid-gen",
+  "displayName": "Custom 'nanoid' Generator",
+  "publisher": "wayne-mcmahon",
+  "description": "",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "nanoid-gen.generateId",
+        "title": "Generate ID"
+      },
+      {
+        "command": "nanoid-gen.insertId",
+        "title": "Insert ID"
+      }
+    ],
+    "configuration": {
+      "title": "nanoid-gen",
+      "properties": {
+        "nanoid-gen.customAlphabet": {
+          "description": "Define a custom set of characters to use in ID generation",
+          "type": "string",
+          "default": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        },
+        "nanoid-gen.configurations": {
+          "type": "array",
+          "default": [
+            {
+              "label": "10 length alpha-numeric (ex: 97H23jY62R)",
+              "length": 10,
+              "type": "alphanumeric"
+            },
+            {
+              "label": "21 length alpha-numeric (ex: TFzy3uaYkOpnFQGWKHiRX)",
+              "length": 21,
+              "type": "alphanumeric"
+            },
+            {
+              "label": "Hex Color Code (ex: e7dee5)",
+              "length": 6,
+              "type": "hex"
+            }
+          ],
+          "description": "Configure ID profiles"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "nanoid-gen.insertId",
+        "key": "ctrl+shift+insert",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "nanoid-gen.insertId",
+          "when": "editorTextFocus",
+          "group": "8_nanoidgen"
+        },
+        {
+          "command": "nanoid-gen.generateId",
+          "when": "editorTextFocus",
+          "group": "8_nanoidgen"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.2.5",
+    "@types/vscode": "^1.81.0",
+    "@vscode/test-electron": "^2.3.2",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.3"
+  },
+  "dependencies": {
+    "nanoid": "^3.3.6"
+  }
+}
